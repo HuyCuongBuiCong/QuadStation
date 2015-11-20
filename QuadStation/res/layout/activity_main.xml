@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.quadstation.MainActivity" >
+
+    <Button
+        android:id="@+id/buttonSelectBTDevice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="SelectBTdevice"
+        android:text="@string/SelectBTdevice" />
+
+    <TextView
+        android:id="@+id/textViewMacAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="---"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/buttonDashBoardCompassAndLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DashBoad" />
+
+    <Button
+        android:id="@+id/buttonGpaph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Graph" />
+
+    <Button
+        android:id="@+id/buttonMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Map" />
+
+    <Button
+        android:id="@+id/buttonPID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PID setting" />
+
+    <Button
+        android:id="@+id/buttonControl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stick Control" />
+
+</LinearLayout>
