@@ -47,10 +47,11 @@ import com.quadstation.communication.BT;
 import com.quadstation.communication.BT_New;
 import com.quadstation.communication.Communication;
 import com.quadstation.helper.Notifications;
-import com.quadstation.mw.MultiWii230;
-import com.quadstation.mw.MultirotorData;
+import com.quadstation.mw.QuadProtocol;
+import com.quadstation.mw.QuadrotorData;
 
 ;
+
 public class App extends Application implements Sensors.Listener {
 
 	public static final int PROTOCOL_220 = 220;
@@ -69,8 +70,7 @@ public class App extends Application implements Sensors.Listener {
 									// done
 
 	public Communication commMW;
-	public Communication commFrsky;
-	public MultirotorData mw;
+	public QuadrotorData mw;
 
 	public boolean FollowMeEnable = false;
 	public boolean FollowMeBlinkFlag = false;
@@ -201,8 +201,7 @@ public class App extends Application implements Sensors.Listener {
 	public final String DEBUG4 = "DEBUG4";
 
 	private final static String GRAPHSTOSHOW = "GRAPHSTOSHOW";
-	public String GraphsToShow = ACCROLL + ";" + ACCZ + ";" + ALT + ";"
-			+ GYROPITCH;
+	public String GraphsToShow = ACCROLL + ";" + ACCZ + ";" + ALT + ";" + GYROPITCH;
 
 	// graphs end
 
@@ -249,7 +248,7 @@ public class App extends Application implements Sensors.Listener {
 
 	public void SelectProtocol() {
 		if (Protocol == PROTOCOL_230) {
-			mw = new MultiWii230(commMW);
+			mw = new QuadProtocol(commMW);
 
 			Log.d("protoocol", "230");
 		}
@@ -278,17 +277,14 @@ public class App extends Application implements Sensors.Listener {
 		ReverseRoll = prefs.getBoolean(REVERSEROLL, false);
 		MapZoomLevel = prefs.getFloat(MAPZOOMLEVEL, 9);
 		MapCenterPeriod = prefs.getInt(MAPCENTERPERIOD, 3);
-		CommunicationTypeMW = prefs.getInt(COMMUNICATION_TYPE_MW,
-				COMMUNICATION_TYPE_BT);
+		CommunicationTypeMW = prefs.getInt(COMMUNICATION_TYPE_MW, COMMUNICATION_TYPE_BT_NEW);
 		// CommunicationTypeFrSky = prefs.getInt(COMMUNICATION_TYPE_FRSKY,
 		// COMMUNICATION_TYPE_BT);
 		SerialPortBaudRateMW = prefs.getInt(SERIAL_PORT_BAUD_RATE_MW, 115200);
-		SerialPortBaudRateFrSky = prefs.getInt(SERIAL_PORT_BAUD_RATE_FRSKY,
-				9600);
+		SerialPortBaudRateFrSky = prefs.getInt(SERIAL_PORT_BAUD_RATE_FRSKY, 9600);
 		// MainRequestMethod = prefs.getInt(MAINREQUESTMETHOD, 2);
 		FrskySupport = prefs.getBoolean(FRSKY_SUPPORT, false);
-		NoDataReceievedWarning = prefs.getBoolean(NO_DATA_RECEIVED_WARNING,
-				true);
+		NoDataReceievedWarning = prefs.getBoolean(NO_DATA_RECEIVED_WARNING, true);
 
 	}
 
@@ -319,9 +315,7 @@ public class App extends Application implements Sensors.Listener {
 		editor.commit();
 
 		if (!quiet) {
-			Toast.makeText(getApplicationContext(),
-					getString(R.string.Settingssaved), Toast.LENGTH_LONG)
-					.show();
+			Toast.makeText(getApplicationContext(), getString(R.string.Settingssaved), Toast.LENGTH_LONG).show();
 			// Say(getString(R.string.Settingssaved));
 		}
 	}
@@ -347,16 +341,13 @@ public class App extends Application implements Sensors.Listener {
 			// Notifications
 			if (mw.i2cError != tempLastI2CErrorCount) {
 				notifications.displayNotification(getString(R.string.Warning),
-						"I2C Error=" + String.valueOf(mw.i2cError), true, 1,
-						false);
+						"I2C Error=" + String.valueOf(mw.i2cError), true, 1, false);
 				tempLastI2CErrorCount = mw.i2cError;
 			}
 
 			if (mw.DataFlow < 0 && NoDataReceievedWarning) {
-				notifications.displayNotification(
-						getString(R.string.Warning),
-						getString(R.string.NoDataRecieved) + " "
-								+ String.valueOf(mw.DataFlow), true, 1, false);
+				notifications.displayNotification(getString(R.string.Warning),
+						getString(R.string.NoDataRecieved) + " " + String.valueOf(mw.DataFlow), true, 1, false);
 			}
 
 			// Checkboxes speaking; ON OFF
@@ -414,8 +405,7 @@ public class App extends Application implements Sensors.Listener {
 	public void OpenInfoOnClick(View v) {
 		{
 			Log.d("aaa", "OpenInfoOnClick " + v.getTag().toString());
-			final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri
-					.parse(v.getTag().toString()));
+			final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(v.getTag().toString()));
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
 		}
@@ -431,17 +421,14 @@ public class App extends Application implements Sensors.Listener {
 	}
 
 	public boolean checkGooglePlayServicesAvailability(Activity activity) {
-		int resultCode = GooglePlayServicesUtil
-				.isGooglePlayServicesAvailable(activity);
+		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
 		if (resultCode != ConnectionResult.SUCCESS) {
-			Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode,
-					activity, 69);
+			Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode, activity, 69);
 			if (dialog != null) {
 				dialog.show();
 				return false;
 			} else {
-				showOkDialogWithText(
-						activity,
+				showOkDialogWithText(activity,
 						"Something went wrong. Please make sure that you have the Play Store installed and that you are connected to the internet.");
 				return false;
 			}
@@ -453,35 +440,28 @@ public class App extends Application implements Sensors.Listener {
 	}
 
 	public void RestartApp() {
-		Intent mStartActivity = new Intent(getApplicationContext(),
-				MainActivity.class);
+		Intent mStartActivity = new Intent(getApplicationContext(), MainActivity.class);
 		int mPendingIntentId = 123456;
-		PendingIntent mPendingIntent = PendingIntent.getActivity(
-				getApplicationContext(), mPendingIntentId, mStartActivity,
-				PendingIntent.FLAG_CANCEL_CURRENT);
-		AlarmManager mgr = (AlarmManager) getApplicationContext()
-				.getSystemService(Context.ALARM_SERVICE);
-		mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 200,
-				mPendingIntent);
+		PendingIntent mPendingIntent = PendingIntent.getActivity(getApplicationContext(), mPendingIntentId,
+				mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+		AlarmManager mgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+		mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 200, mPendingIntent);
 		System.exit(0);
 	}
 
 	@Override
 	public void onSensorsStateChangeMagAcc() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onSensorsStateGPSLocationChange() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onSensorsStateGPSStatusChange() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }

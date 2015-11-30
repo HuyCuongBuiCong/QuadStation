@@ -25,14 +25,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1" >
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ClickOnTheNameForInfo"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/link" />
                 </TableRow>
 
                 <TableRow
@@ -287,7 +279,8 @@
                     android:id="@+id/TableRow05"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/tableRows1" >
+                    android:background="@color/tableRows1"
+                    android:visibility="gone" >
 
                     <TextView
                         android:id="@+id/PIDName3"
@@ -349,7 +342,8 @@
                     android:id="@+id/TableRow04"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/tableRows3" >
+                    android:background="@color/tableRows3"
+                    android:visibility="gone" >
 
                     <TextView
                         android:id="@+id/PIDName4"
@@ -404,7 +398,8 @@
                     android:id="@+id/TableRow03"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/tableRows3" >
+                    android:background="@color/tableRows3"
+                    android:visibility="gone" >
 
                     <TextView
                         android:id="@+id/PIDName5"
@@ -462,7 +457,8 @@
                     android:id="@+id/TableRow02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/tableRows3" >
+                    android:background="@color/tableRows3"
+                    android:visibility="gone" >
 
                     <TextView
                         android:id="@+id/PIDName6"
@@ -582,7 +578,8 @@
                     android:id="@+id/TableRow01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/tableRows5" >
+                    android:background="@color/tableRows5"
+                    android:visibility="gone" >
 
                     <TextView
                         android:id="@+id/PIDName8"
@@ -765,7 +762,8 @@
                     android:id="@+id/tableRow7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/tableRows3" >
+                    android:background="@color/tableRows3"
+                    android:visibility="gone" >
 
                     <TextView
                         android:id="@+id/textView12"
@@ -807,7 +805,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/Profile" />
+                        android:text="Save your setting" />
                 </TableRow>
 
                 <TableRow
@@ -866,7 +864,6 @@
                 android:tag="DONTASK"
                 android:text="@string/SavetoEEPROM"
                 android:visibility="invisible" />
-
         </LinearLayout>
     </ScrollView>
 

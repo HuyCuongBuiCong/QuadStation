@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/com/quadstation/dashboard/CompassAndLevelViewActivity.java=UTF-8
 encoding//src/com/quadstation/helper/Functions.java=UTF-8
 encoding//src/com/quadstation/helper/LowPassFilter.java=UTF-8
 encoding//src/com/quadstation/helper/Sensors.java=UTF-8

@@ -53,7 +53,6 @@ public class CompassAndLevelViewActivity extends Activity {
 				M3.setProgress((int) app.mw.mot[2] - 1000);
 			if (app.mw.mot[3] >= 1000)
 				M4.setProgress((int) app.mw.mot[3] - 1000);
-			if (app.mw.mot[4] >= 1000)
 
 			TVM1.setText(Integer.toString((int) app.mw.mot[0]));
 			TVM2.setText(Integer.toString((int) app.mw.mot[1]));

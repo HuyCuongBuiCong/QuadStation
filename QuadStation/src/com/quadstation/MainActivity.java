@@ -27,12 +27,12 @@ import com.quadstation.dashboard.CompassAndLevelViewActivity;
 import com.quadstation.graph.GraphsActivity;
 
 public class MainActivity extends SherlockActivity {
-	Button buttonBT, buttonDashBoard, buttonGraph, buttonMap, buttonPID,
-			buttonControl;
+	Button buttonBT, buttonDashBoard, buttonGraph, buttonMap, buttonPID, buttonControl;
 	TextView textViewBTdevice;
 	private boolean killme = false;
 	private App app;
 	TextView TVInfo;
+	
 	ActionBarSherlock actionBar;
 	Context context;
 	private static final int REQUEST_CONNECT_DEVICE_MULTIWII = 1;
@@ -75,20 +75,16 @@ public class MainActivity extends SherlockActivity {
 				Log.d("ccc", "Device Name=" + deviceName);
 				break;
 			case BT_New.MESSAGE_TOAST:
-				Log.i("ccc",
-						"MESSAGE_TOAST:"
-								+ msg.getData().getString(BT_New.TOAST));
-				Toast.makeText(getApplicationContext(),
-						msg.getData().getString(BT_New.TOAST),
-						Toast.LENGTH_SHORT).show();
+				Log.i("ccc", "MESSAGE_TOAST:" + msg.getData().getString(BT_New.TOAST));
+				Toast.makeText(getApplicationContext(), msg.getData().getString(BT_New.TOAST), Toast.LENGTH_SHORT)
+						.show();
 				break;
 			}
 		}
 	};
 
 	private final void setStatus(String message) {
-		Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT)
-				.show();
+		Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
 	}
 
@@ -105,11 +101,7 @@ public class MainActivity extends SherlockActivity {
 		buttonPID = (Button) findViewById(R.id.buttonPID);
 		buttonControl = (Button) findViewById(R.id.buttonControl);
 		textViewBTdevice = (TextView) findViewById(R.id.textViewMacAddress);
-		// app.commMW.SetHandler(mHandler1);
-		// requestWindowFeature(Window.FEATURE_PROGRESS);
-		// getSupportActionBar().setDisplayShowTitleEnabled(false);
-		// app.AppStartCounter++;
-		// app.SaveSettings(true);
+	
 
 	}
 
@@ -122,8 +114,7 @@ public class MainActivity extends SherlockActivity {
 			public void onClick(View v) {
 				Intent serverIntent = null;
 				serverIntent = new Intent(context, DeviceListActivity.class);
-				startActivityForResult(serverIntent,
-						REQUEST_CONNECT_DEVICE_MULTIWII);
+				startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_MULTIWII);
 
 			}
 		});
@@ -132,8 +123,7 @@ public class MainActivity extends SherlockActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent dashBoardIntent = new Intent(context,
-						CompassAndLevelViewActivity.class);
+				Intent dashBoardIntent = new Intent(context, CompassAndLevelViewActivity.class);
 				startActivity(dashBoardIntent);
 			}
 		});
@@ -168,20 +158,11 @@ public class MainActivity extends SherlockActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent ControlIntent = new Intent(context,
-						ControlActivity.class);
+				Intent ControlIntent = new Intent(context, ControlActivity.class);
 				startActivity(ControlIntent);
 			}
 		});
-		// app.ForceLanguage();
-		// if (app.commMW.Connected) {
-		//
-		// try {
-		// mHandler.removeCallbacksAndMessages(null);
-		// } catch (Exception e) {
-		// }
-		// mHandler.postDelayed(update, 100);
-		// }
+		
 
 	}
 
@@ -189,8 +170,7 @@ public class MainActivity extends SherlockActivity {
 		if (app.checkGooglePlayServicesAvailability(this)) {
 			killme = true;
 			mHandler.removeCallbacksAndMessages(null);
-			startActivity(new Intent(getApplicationContext(),
-					MapWaypointsActivity.class).putExtra("WAYPOINT", false));
+			startActivity(new Intent(getApplicationContext(), MapWaypointsActivity.class).putExtra("WAYPOINT", false));
 		}
 	}
 
@@ -210,8 +190,7 @@ public class MainActivity extends SherlockActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(
-			com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		if (item.getItemId() == R.id.menu_exit) {
 			EXIT(false);
 			return true;
@@ -239,10 +218,8 @@ public class MainActivity extends SherlockActivity {
 		// } catch (Exception e) {
 		// }
 
-		if (app.DisableBTonExit
-				&& app.ConfigHasBeenChange_DisplayRestartInfo == false) {
+		if (app.DisableBTonExit && app.ConfigHasBeenChange_DisplayRestartInfo == false) {
 			app.commMW.Disable();
-			app.commFrsky.Disable();
 		}
 		app.mw.CloseLoggingFile();
 		app.notifications.Cancel(99);
@@ -261,12 +238,7 @@ public class MainActivity extends SherlockActivity {
 			mHandler.removeCallbacksAndMessages(null);
 			if (app.commMW.Connected)
 				app.commMW.Close();
-			if (app.commFrsky.Connected)
-				app.commFrsky.Close();
-		}
-
-		catch (Exception e) {
-
+		} catch (Exception e) {
 		}
 
 	}
@@ -277,9 +249,7 @@ public class MainActivity extends SherlockActivity {
 			if (!app.MacAddress.equals("")) {
 				app.commMW.Connect(app.MacAddress, app.SerialPortBaudRateMW);
 			} else {
-				Toast.makeText(
-						getApplicationContext(),
-						"Wrong MAC address. Go to Config and select correct device",
+				Toast.makeText(getApplicationContext(), "Wrong MAC address. Go to Config and select correct device",
 						Toast.LENGTH_LONG).show();
 			}
 			try {
@@ -309,8 +279,7 @@ public class MainActivity extends SherlockActivity {
 		switch (requestCode) {
 		case REQUEST_CONNECT_DEVICE_MULTIWII:
 			if (resultCode == Activity.RESULT_OK) {
-				String address = data.getExtras().getString(
-						DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+				String address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
 				app.MacAddress = address;
 				textViewBTdevice.setText("MAC:" + app.MacAddress);
 			}
@@ -318,8 +287,7 @@ public class MainActivity extends SherlockActivity {
 
 		case REQUEST_CONNECT_DEVICE_FRSKY:
 			if (resultCode == Activity.RESULT_OK) {
-				String address = data.getExtras().getString(
-						DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+				String address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
 				app.MacAddressFrsky = address;
 				textViewBTdevice.setText("MAC:" + app.MacAddressFrsky);
 			}

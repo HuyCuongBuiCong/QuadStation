@@ -1471,6 +1471,8 @@ containing a value of this type.
         public static final int powered_by_google_light=0x7f0200a9;
         public static final int shutdown=0x7f0200aa;
         public static final int social_share=0x7f0200ab;
+        public static final int stylebutton=0x7f0200ac;
+        public static final int theme=0x7f0200ad;
     }
     public static final class id {
         public static final int Button01=0x7f0800f1;
@@ -1771,10 +1773,11 @@ containing a value of this type.
         public static final int device_name=0x7f03001b;
         public static final int graph_show_layout=0x7f03001c;
         public static final int pid_layout=0x7f03001d;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001e;
-        public static final int sherlock_spinner_item=0x7f03001f;
-        public static final int waypoint_layout=0x7f030020;
-        public static final int waypoints_map_layout=0x7f030021;
+        public static final int pid_layout2=0x7f03001e;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001f;
+        public static final int sherlock_spinner_item=0x7f030020;
+        public static final int waypoint_layout=0x7f030021;
+        public static final int waypoints_map_layout=0x7f030022;
     }
     public static final class menu {
         public static final int compass_and_level_view=0x7f0c0000;
@@ -2251,11 +2254,19 @@ containing a value of this type.
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
+
+
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
+
+
+
         
 
         Base application theme for API 11+. This theme completely replaces
@@ -2373,6 +2384,7 @@ containing a value of this type.
         public static final int Widget_Sherlock_SearchAutoCompleteTextView=0x7f050039;
         public static final int Widget_Sherlock_Spinner_DropDown_ActionBar=0x7f050029;
         public static final int Widget_Sherlock_TextView_SpinnerItem=0x7f050037;
+        public static final int stylebutton=0x7f050060;
     }
     public static final class styleable {
         /** Attributes that can be used with a AdsAttrs.

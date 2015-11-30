@@ -25,9 +25,9 @@ import com.quadstation.communication.Communication;
 
 import android.util.Log;
 
-public class MultiWii230 extends MultirotorData {
+public class QuadProtocol extends QuadrotorData {
 
-	public MultiWii230(Communication bt) {
+	public QuadProtocol(Communication bt) {
 		EZGUIProtocol = "2.3";
 
 		timer1 = 10; // used to send request every 10 requests

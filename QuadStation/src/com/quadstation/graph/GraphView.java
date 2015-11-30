@@ -4,7 +4,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import com.quadstation.graph.GraphViewSeries.GraphViewSeriesStyle;
-import com.quadstation.graph.GraphView.GraphViewData;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -43,10 +42,10 @@ abstract public class GraphView extends LinearLayout {
 		/**
 		 * @param context
 		 */
+		@SuppressWarnings("deprecation")
 		public GraphViewContentView(Context context) {
 			super(context);
-			setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-					LayoutParams.FILL_PARENT));
+			setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		}
 
 		/**
@@ -87,8 +86,8 @@ abstract public class GraphView extends LinearLayout {
 				float y = ((graphheight / vers) * i) + border;
 				canvas.drawLine(horstart, y, width, y, paint);
 				paint.setColor(Color.BLACK);
-				//canvas.drawText(verlabels[i], 0, y, paint);
-				//canvas.drawText("jhkjhkj", horstart, height - 4, paint);
+				// canvas.drawText(verlabels[i], 0, y, paint);
+				// canvas.drawText("jhkjhkj", horstart, height - 4, paint);
 			}
 
 			// horizontal labels + lines
@@ -102,18 +101,17 @@ abstract public class GraphView extends LinearLayout {
 					paint.setTextAlign(Align.RIGHT);
 				if (i == 0)
 					paint.setTextAlign(Align.LEFT);
-				//paint.setColor(graphViewStyle.getHorizontalLabelsColor());
-				//paint.setColor(Color.BLACK);
-				//paint.setTextSize(48f);
-				//canvas.drawText(horlabels[i], x, height - 4, paint);
-				//canvas.drawText("cc", 500, 500, paint);
-				Log.d("GrapView","text");
-				//canvas.drawText("Cuong", x+25, height - 4, paint);
+				// paint.setColor(graphViewStyle.getHorizontalLabelsColor());
+				// paint.setColor(Color.BLACK);
+				// paint.setTextSize(48f);
+				// canvas.drawText(horlabels[i], x, height - 4, paint);
+				// canvas.drawText("cc", 500, 500, paint);
+				Log.d("GrapView", "text");
+				// canvas.drawText("Cuong", x+25, height - 4, paint);
 			}
 
 			paint.setTextAlign(Align.CENTER);
-			canvas.drawText(title, (graphwidth / 2) + horstart, border - 4,
-					paint);
+			canvas.drawText(title, (graphwidth / 2) + horstart, border - 4, paint);
 
 			if (maxY == minY) {
 				// if min/max is the same, fake it so that we can render a line
@@ -125,8 +123,7 @@ abstract public class GraphView extends LinearLayout {
 			paint.setStrokeCap(Paint.Cap.ROUND);
 
 			for (int i = 0; i < graphSeries.size(); i++) {
-				drawSeries(canvas, _values(i), graphwidth, graphheight, border,
-						minX, minY, diffX, diffY, horstart,
+				drawSeries(canvas, _values(i), graphwidth, graphheight, border, minX, minY, diffX, diffY, horstart,
 						graphSeries.get(i).style);
 			}
 
@@ -216,10 +213,10 @@ abstract public class GraphView extends LinearLayout {
 		/**
 		 * @param context
 		 */
+		@SuppressWarnings("deprecation")
 		public VerLabelsView(Context context) {
 			super(context);
-			setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-					LayoutParams.FILL_PARENT, 10));
+			setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 10));
 		}
 
 		/**
@@ -245,7 +242,7 @@ abstract public class GraphView extends LinearLayout {
 				float y = ((graphheight / vers) * i) + border;
 				paint.setTextSize(20);
 				paint.setColor(Color.BLACK);
-				//paint.setT
+				// paint.setT
 				canvas.drawText(verlabels[i], 0, y, paint);
 			}
 		}
@@ -278,10 +275,10 @@ abstract public class GraphView extends LinearLayout {
 	 * @param title
 	 *            [optional]
 	 */
+	@SuppressWarnings("deprecation")
 	public GraphView(Context context, String title) {
 		super(context);
-		setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-				LayoutParams.FILL_PARENT));
+		setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
 		if (title == null)
 			title = "";
@@ -296,8 +293,7 @@ abstract public class GraphView extends LinearLayout {
 		viewVerLabels = new VerLabelsView(context);
 		addView(viewVerLabels);
 		graphViewContentView = new GraphViewContentView(context);
-		addView(graphViewContentView, new LayoutParams(
-				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1));
+		addView(graphViewContentView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1));
 	}
 
 	public GraphViewStyle getGraphViewStyle() {
@@ -361,27 +357,23 @@ abstract public class GraphView extends LinearLayout {
 		}
 		float lRight = lLeft + legendWidth;
 		float lBottom = lTop + legendHeight;
-		canvas.drawRoundRect(new RectF(lLeft, lTop, lRight, lBottom), 8, 8,
-				paint);
+		canvas.drawRoundRect(new RectF(lLeft, lTop, lRight, lBottom), 8, 8, paint);
 
 		for (int i = 0; i < graphSeries.size(); i++) {
 			paint.setColor(graphSeries.get(i).style.color);
-			canvas.drawRect(new RectF(lLeft + 5, lTop + 5
-					+ (i * (shapeSize + 5)), lLeft + 5 + shapeSize, lTop
-					+ ((i + 1) * (shapeSize + 5))), paint);
+			canvas.drawRect(new RectF(lLeft + 5, lTop + 5 + (i * (shapeSize + 5)), lLeft + 5 + shapeSize,
+					lTop + ((i + 1) * (shapeSize + 5))), paint);
 			if (graphSeries.get(i).description != null) {
 				paint.setColor(Color.BLACK);
 				paint.setTextAlign(Align.LEFT);
-				canvas.drawText(graphSeries.get(i).description, lLeft + 5
-						+ shapeSize + 5, lTop + shapeSize
-						+ (i * (shapeSize + 5)), paint);
+				canvas.drawText(graphSeries.get(i).description, lLeft + 5 + shapeSize + 5,
+						lTop + shapeSize + (i * (shapeSize + 5)), paint);
 			}
 		}
 	}
 
-	abstract public void drawSeries(Canvas canvas, GraphViewData[] values,
-			float graphwidth, float graphheight, float border, double minX,
-			double minY, double diffX, double diffY, float horstart,
+	abstract public void drawSeries(Canvas canvas, GraphViewData[] values, float graphwidth, float graphheight,
+			float border, double minX, double minY, double diffX, double diffY, float horstart,
 			GraphViewSeriesStyle style);
 
 	/**
@@ -437,8 +429,7 @@ abstract public class GraphView extends LinearLayout {
 		}
 
 		for (int i = 0; i <= numLabels; i++) {
-			labels[numLabels - i] = formatLabel(min
-					+ ((max - min) * i / numLabels), false);
+			labels[numLabels - i] = formatLabel(min + ((max - min) * i / numLabels), false);
 		}
 		return labels;
 	}
@@ -477,8 +468,7 @@ abstract public class GraphView extends LinearLayout {
 					highest = values[values.length - 1].valueX;
 					for (int i = 1; i < graphSeries.size(); i++) {
 						values = graphSeries.get(i).values;
-						highest = Math.max(highest,
-								values[values.length - 1].valueX);
+						highest = Math.max(highest, values[values.length - 1].valueX);
 					}
 				}
 			}
@@ -666,8 +656,7 @@ abstract public class GraphView extends LinearLayout {
 
 							// viewportStart + viewportSize must not be > maxX
 							double maxX = getMaxX(true);
-							double overlap = viewportStart + viewportSize
-									- maxX;
+							double overlap = viewportStart + viewportSize - maxX;
 							if (overlap > 0) {
 								// scroll left
 								if (viewportStart - overlap > minX) {

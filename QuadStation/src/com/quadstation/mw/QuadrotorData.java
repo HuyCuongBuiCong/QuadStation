@@ -28,7 +28,7 @@ import com.quadstation.map.Waypoint;
 import android.os.Environment;
 import android.util.Log;
 
-public abstract class MultirotorData {
+public abstract class QuadrotorData {
 
 	/******************************* Multiwii Serial Protocol **********************/
 	final String MSP_HEADER = "$M<";
